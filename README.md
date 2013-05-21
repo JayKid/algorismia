@@ -1,4 +1,4 @@
-algorismia
+Algorismia
 ==========
 
 Practica d'algorismia
