@@ -1,0 +1,4 @@
+Algorismia
+==========
+
+Practica d'algorismia
