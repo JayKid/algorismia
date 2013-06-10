@@ -12,6 +12,9 @@ class Empleado {
     string m_departamento;
     string m_posicion;
     long m_salario;
+    
+    Empleado();
+    ~Empleado();
     void Imprimir();
   private:
 };

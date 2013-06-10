@@ -1,11 +1,11 @@
 #include "Empleado.h"
 
 Empleado::Empleado(){
-  cout << "Me creo" << endl;
+  cerr << "Me creo" << endl;
 }
 
 Empleado::~Empleado(){
-  cout << "Me destruyo" << endl;
+  cerr << "Me destruyo" << endl;
 }
 
 
