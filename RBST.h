@@ -21,15 +21,19 @@ class RBST {
   
    private:
      int size;
-     struct node* root;
+     node* root;
      
-     RBST insert_at_root(int, RBST);
-     //void split(int, RBST, RBST*, RBST*);
+     node* insertAtRoot(int, node *);
+     node* insertNode(int, node *, int);
+     
+     
+     
+     void split(int, node* , node**, node**);
      //void Flip_orientatio(int*, struct node *);
      
    public:
      RBST();
-     //RBST(int, RBST*, RBST*);
+     RBST(int, node*);
      ~RBST();
      
      RBST insert(int, RBST);
