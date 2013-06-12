@@ -108,6 +108,32 @@ struct node *RBST::insertNode(int x, struct node *p, int n) {
   return p;
 }
 
+node* deleteNode(int x, node* t, int size) {
+  node *p, *parent, *aux;
+  parent = NULL;
+  int n = size;
+  while(t != NULL) {
+    if (x == t->key) {
+      aux = join(t,n);
+      if (parent == NULL) t = aux;
+      else {
+        if (parent->key > x) parent->left = aux;
+        else parent->right = aux;
+      }
+      break;
+    }
+    parent = t;
+    if (x < t->key) {
+      if (!t->orientation_right) flip_orientation(&n,t);
+      t = t->left;
+    }
+    else {
+      if (t->orientation_right) flip_orientation(&n,t);
+      t = t->right;
+    }
+  }
+}
+
 
 //Públiques:
 
@@ -121,7 +147,13 @@ void RBST::insert(int x) {
   this->size += 1;
 }
 
-void pinta(struct node *p) {
+void RBST::delete(int x) {
+  struct node *p = deleteNode(x, this->root, this->size);
+  this->root = p;
+  this->size -= 1;
+}
+
+void pinta(node *p) {
   if (p == NULL) cout << "Abuit" << endl;
   else {
     if (p->orientation_right)

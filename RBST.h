@@ -20,6 +20,7 @@ class RBST {
      
      node* insertAtRoot(int, node *,int);
      node* insertNode(int, node *, int);
+     node* deleteNode(int, node *, int);
      
      
      
@@ -34,6 +35,7 @@ class RBST {
      int getSize();
      
      void insert(int);
+     void delete(int);
      
      void Imprimir();
 };
