@@ -31,6 +31,8 @@ class RBST {
      RBST(int, node*);
      ~RBST();
      
+     int getSize();
+     
      void insert(int);
      
      void Imprimir();

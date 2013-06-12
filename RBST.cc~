@@ -60,9 +60,11 @@ void RBST::split(int x, struct node *T, struct node **S, struct node **G) {
 struct node *RBST::insertNode(int x, struct node *p, int n) {
   cout << "insertNode" << endl;
   int r = rand()%(n+1);
+  cout << "    rand: " << r << endl;
   if (r == n) {
     cout << "    insertRoot" << endl;
     p = insertAtRoot(x,p);
+    p->size = n;
     cout << "    p->key: " << p->key << endl;
   }
   else if (x < p->key) {
@@ -70,6 +72,7 @@ struct node *RBST::insertNode(int x, struct node *p, int n) {
       p->orientation_right = !p->orientation_right;
       p->size = n-1-p->size;
     }
+    p->size += 1;
     p->left = insertNode(x, p->left, p->size);
   }
   else if (x > p->key) {
@@ -77,34 +80,39 @@ struct node *RBST::insertNode(int x, struct node *p, int n) {
       p->orientation_right = !p->orientation_right;
       p->size = n-1-p->size;
     }
+    p->size += 1;
     p->right = insertNode(x, p->right, p->size);
   }
-  //p->size++;
   return p;
 }
 
 
 //Públiques:
 
+int RBST::getSize() {
+  return size;
+}
 
-
-RBST RBST::insert(int x) {
+void RBST::insert(int x) {
   struct node *p = insertNode(x, this->root, this->size);
   this->root = p;
-  return this;
+  this->size += 1;
 }
 
 void pinta(struct node *p) {
   if (p == NULL) return;
   else {
-    cout << p->key << " ";
+    if (p->orientation_right)
+      cout << p->key <<  " te: " << p->size << " fills drets" << endl;
+    else 
+      cout << p->key <<  " te: " << p->size << " fills esquerres" << endl;
     pinta(p->left);
     pinta(p->right);
   }
 }
 
 void RBST::Imprimir() {
-    cout << "L'arbre inordre es: " << endl; 
+    cout << "L'arbre preordre es: " << endl; 
     if (this->root == NULL) {
       cout << "Arbre buit, pointer null" << endl; 
       return;
