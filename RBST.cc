@@ -20,14 +20,39 @@ RBST::~RBST(){
 }
 
 
-struct node *RBST::insertAtRoot(int x, struct node *p) {
+struct node *RBST::insertAtRoot(int x, struct node *p, int n) {
   cout << "insertAtRoot" << endl;
-  struct node *S, *G;
-  
-  split(x,p,&S,&G);
   node *q = new node();
-  (*q).key = x; q->left = S; q->right = G;
-  cout << "  q: " << (*q).key << " " << S << " " << G << endl;
+
+  if (p == NULL)
+  {
+    q->key = x;
+    q->orientation_right = true;
+    q->size = 0;
+  }
+
+  else
+  {
+    struct node *S, *G;
+    bool dreta = true;
+
+    if (x > p->key)
+    dreta = false;
+
+    split(x,p,&S,&G);
+    if (dreta && p->orientation_right || !dreta && !p->orientation_right) {
+      q->orientation_right = !p->orientation_right;
+      q->size = n-1-p->size;
+    }
+    else {
+      q->orientation_right = p->orientation_right;
+      q->size = p->size;
+    }
+
+    q->key = x; q->left = S; q->right = G;
+    cout << "  q: " << (*q).key << " " << S << " " << G << endl;
+  }
+  
   return q;
 }
 
@@ -63,25 +88,22 @@ struct node *RBST::insertNode(int x, struct node *p, int n) {
   cout << "    rand: " << r << endl;
   if (r == n) {
     cout << "    insertRoot" << endl;
-    p = insertAtRoot(x,p);
-    p->size = n;
+    p = insertAtRoot(x,p,n);
     cout << "    p->key: " << p->key << endl;
   }
   else if (x < p->key) {
-    if (p->orientation_right) {
-      p->orientation_right = !p->orientation_right;
-      p->size = n-1-p->size;
-    }
-    p->size += 1;
-    p->left = insertNode(x, p->left, p->size);
-  }
-  else if (x > p->key) {
     if (!p->orientation_right) {
       p->orientation_right = !p->orientation_right;
       p->size = n-1-p->size;
     }
-    p->size += 1;
-    p->right = insertNode(x, p->right, p->size);
+    p->left = insertNode(x, p->left, n-1-p->size);
+  }
+  else if (x > p->key) {
+    if (p->orientation_right) {
+      p->orientation_right = !p->orientation_right;
+      p->size = n-1-p->size;
+    }
+    p->right = insertNode(x, p->right, n-1-p->size);
   }
   return p;
 }

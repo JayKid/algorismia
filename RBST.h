@@ -18,7 +18,7 @@ class RBST {
      int size;
      node* root;
      
-     node* insertAtRoot(int, node *);
+     node* insertAtRoot(int, node *,int);
      node* insertNode(int, node *, int);
      
      
