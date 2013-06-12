@@ -3,11 +3,6 @@
 #include <stdlib.h>  //srand, rand
 using namespace std;
 
-
-#ifndef EMPLEADO_H
-#define EMPLEADO_H
-
-
 struct node{
   int size;
   int key;
@@ -36,9 +31,8 @@ class RBST {
      RBST(int, node*);
      ~RBST();
      
-     RBST insert(int, RBST);
+     void insert(int);
      
      void Imprimir();
 };
  
-#endif
