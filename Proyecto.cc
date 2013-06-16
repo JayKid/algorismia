@@ -38,8 +38,8 @@ int main() {
     {
         int command_num = switchmap[command];
         int number;
-        string arbre, element;
-        RBST aux,nou;
+        string arbre, arbre2, element;
+        RBST aux,aux2,nou;
         cin >> arbre;
         switch ( command_num ) 
         {
@@ -98,7 +98,23 @@ int main() {
             break;
 
             case MERGE:
-                
+                cin >> arbre2;
+
+                cout << "arbre1 es: " << arbre << " arbre2 es: " << arbre2 << endl;
+                if(arbres.find(arbre) == arbres.end() || arbres.find(arbre2) == arbres.end())
+                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+
+                else
+                {
+                    cout << "hey" << endl;
+                    aux = arbres[arbre];
+                    aux2 = arbres[arbre2];
+                    aux = aux.merge(aux2);
+                    aux2 = nou;
+                    arbres[arbre] = aux;
+                    arbres[arbre2] = aux2;
+                }
+
             break;
 
             case CARD:
