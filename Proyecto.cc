@@ -88,7 +88,10 @@ int main() {
                 else
                 {
                     aux = arbres[arbre];
-                    cout << aux.contains(element) << endl;
+                    if (aux.contains(element))
+                        cout << "true";
+                    else cout << "false";
+                    cout << endl;
                     
                 }
             break;
@@ -108,7 +111,21 @@ int main() {
             break;
 
             case NTH:
-                
+
+                cin >> element;
+
+                if(arbres.find(arbre) == arbres.end())
+                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+
+                else if (element < 1 || element > arbres[arbre].getSize())
+                    cout << "ERROR";
+
+                else
+                {
+                    aux = arbres[arbre];
+                    cout << aux.nth(element) << endl;
+                }
+
             break;
 
             case LEQ:
@@ -124,10 +141,25 @@ int main() {
             break;
 
             case MIN:
-                
+                if(arbres.find(arbre) == arbres.end())
+                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+
+                else
+                {
+                    aux = arbres[arbre];
+                    cout << aux.treeMin() << endl;
+                }
             break;
 
             case MAX:
+                if(arbres.find(arbre) == arbres.end())
+                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+
+                else
+                {
+                    aux = arbres[arbre];
+                    cout << aux.treeMax() << endl;
+                }
                 
             break;
 
