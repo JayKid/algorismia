@@ -26,6 +26,8 @@ private:
     int split(string, node* , int, node**, node**);
     void flip_orientation(int*, struct node *);
     void pintaInOrdre(node*, bool);
+    string treeMinNode(node*);
+    string treeMaxNode(node*);
 
 public:
     RBST();
@@ -37,15 +39,16 @@ public:
     void pintaNode(node*); //aquesta va fora
     void insert(string);
     void deleteN(string);
+    void inOrdre();
+    string treeMin();
+    string treeMax();
+
     RBST merge(RBST);
     bool contains(string);
     string nth(int);
     int leq(string);
     int gt(string);
-    void inOrdre();
     void between(string, string);
-    string treeMin();
-    string treeMax();
 
     void Imprimir();
  };

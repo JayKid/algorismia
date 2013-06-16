@@ -193,6 +193,14 @@ void RBST::deleteNode(string x, node* t, int size) {
   }
 }
 
+string RBST::treeMinNode(node* p) {
+   return (p->left != NULL)?treeMinNode(p->left):p->key;
+}
+
+string RBST::treeMaxNode(node* p) {
+   return (p->right != NULL)?treeMinNode(p->right):p->key;
+}
+
 
 //Públiques:
 
@@ -230,13 +238,17 @@ void pinta(node *p) {
 }
 
 
-void RBST::pintaInOrdre(node *p, bool primer) {
+void RBST::pintaInOrdre(node *p, bool &primer) {
   if (p != NULL)
   {
-    pintaInOrdre(p->left, false);
-    if (primer) cout << p->key;
-    else cout << "," << p->key;
-    pintaInOrdre(p->right, false);
+    if (!primer && p->left == NULL) {
+      primer = true;
+      cout << p->key;
+      return;
+    }
+    pintaInOrdre(p->left, primer);
+    cout << "," << p->key;
+    pintaInOrdre(p->right, primer);
   }
 }
 
@@ -269,8 +281,10 @@ int RBST::gt(string s) {
 
 void RBST::inOrdre() {
     cout << "[";
-    if (this->root != NULL)
-      pintaInOrdre(this->root, true);
+    if (this->root != NULL) {}
+      bool primer = (this->root->left == NULL)
+      pintaInOrdre(this->root, primer);
+    }
     cout << "]" << endl;
 }
 
@@ -280,13 +294,11 @@ void RBST::between(string, string) {
 }
 
 string RBST::treeMin() {
-
-  return "dale a ALL i mira el primero tonto!";
+  return treeMinNode(this->root);
 }
 
 string RBST::treeMax(){
-
-  return "dale a ALL i mira el ultimo tontaina!";
+  return treeMaxNode(this->root);
 }
 
 void RBST::Imprimir() {
