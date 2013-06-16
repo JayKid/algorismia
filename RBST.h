@@ -48,9 +48,9 @@ public:
     bool contains(string);
     int leq(string);
     int gt(string);
+    string nth(int);
 
     RBST merge(RBST);
-    string nth(int);
     void between(string, string);
 
     void Imprimir();

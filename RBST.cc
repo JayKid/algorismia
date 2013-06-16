@@ -201,36 +201,35 @@ string RBST::treeMaxNode(node* p) {
    return (p->right != NULL)?treeMinNode(p->right):p->key;
 }
 
-int RBST::leqNode(string s, node* p, int size) {
-  cout << "cridem leqNode amb size: " << size << endl;
-  if (p == NULL) {
-    return 0;
+int RBST::leqNode(string x, node* T, int sizeT) {
+
+  int midaS;
+  if (T == NULL) {
+    midaS = 0;
+  }
+  else if (x == T->key) {
+    return (T->orientation_right)?(sizeT-T->size):(T->size+1);
+  }
+  else if (x < T->key) {
+    if (!T->orientation_right) {
+      T->orientation_right = true;
+      T->size = sizeT-1-T->size;
+    }
+    midaS = leqNode(x, T->left, sizeT-1-T->size);
   }
   else {
-    int n = size;
-    if (!p->orientation_right) flip_orientation(&n, p);
-    else n = n-1-p->size;
-    if (p->key <= s) {
-      return 1+n;
+    if (T->orientation_right) {
+      T->orientation_right = false;
+      T->size = sizeT-1-T->size;
     }
-    else return leqNode(s, p->left, n);
+    midaS = leqNode(x, T->right, sizeT-1-T->size);
+    midaS = T->size+midaS+1;
   }
+  return midaS;
 }
 
-int RBST::gtNode(string s, node* p, int size) {
-  cout << "cridem gtNode amb size: " << size << endl;
-  if (p == NULL) {
-    return 0;
-  }
-  else {
-    int n = size;
-    if (p->orientation_right) flip_orientation(&n, p);
-    else n = n-1-p->size;
-    if (p->key > s) {
-      return 1+n;
-    }
-    else return gtNode(s, p->right, n);
-  }
+int RBST::gtNode(string x, node* T, int sizeT) {
+  return sizeT-leqNode(x,T,sizeT);
 }
 
 //Públiques:
