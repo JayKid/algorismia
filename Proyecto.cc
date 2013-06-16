@@ -1,60 +1,100 @@
 #include "RBST.h"
+#include <map>;
 
+const int INIT = 1;const int INS = 2;
+const int DEL = 3;const int CONT = 4;
+const int MERGE = 5;const int CARD = 6;
+const int NTH = 7;const int LEQ = 8;
+const int GT = 9;const int BETWEEN = 10;
+const int MIN = 11;const int MAX = 12;
+const int ALL = 13;
 
+map<string,int> getSwitchMap() 
+{
+    map<string,int> m;
+    m["init"] = INIT;
+    m["ins"] = INS;
+    m["del"] = DEL;
+    m["cont"] = CONT;
+    m["merge"] = MERGE;
+    m["card"] = CARD;
+    m["nth"] = NTH;
+    m["leq"] = LEQ;
+    m["gt"] = GT;
+    m["between"] = BETWEEN;
+    m["min"] = MIN;
+    m["max"] = MAX;
+    m["all"] = ALL;
+    return m;
+}
 
 int main() {
-  RBST T;
-  rand();
+    RBST T;
+    rand();
 
-//   int element = 1;
-//   while (element != -1) {
-//     T.insert(element);
-//     T.Imprimir();
-//     cout << "Quin element vols inserir?" << endl;
-//     cin >> element; 
-//   }
-  
-// cout << "FEM SPLIT" << endl;
+    map<string,int> switchmap = getSwitchMap();
 
-// node *S, *G;
-// cout << "returnSplit: " << T.split(314,T.getRoot(), T.getSize(), &S, &G) << endl;
-// T.Imprimir();
+    string command;
+    map<string,RBST> arbres;
+    while (cin >> command) 
+    {
+        int command_num = switchmap[command];
+        string arbre;
+        cin >> arbre;
+        switch ( command_num ) 
+        {
+            case INIT:
+                arbres[arbre] = RBST();
+            break;
 
-// cout << "FI SPLIT" << endl;
+            case INS:
+            break;
 
+            case DEL:
+            break;
 
+            case CONT:
+                
+            break;
 
+            case MERGE:
+                
+            break;
 
+            case CARD:
+                
+            break;
 
+            case NTH:
+                
+            break;
 
+            case LEQ:
+                
+            break;
 
+            case GT:
+                
+            break;
 
+            case BETWEEN:
+                
+            break;
 
+            case MIN:
+                
+            break;
 
+            case MAX:
+                
+            break;
 
+            case ALL:
+                
+            break;
 
-T.insert("hola");
-
-T.insert("adios");
-
-T.insert("enga!");
-
-  T.Imprimir();
-  cout << "size arbre: " << T.getSize() << endl;
-
-T.deleteN("hola");
-
-  T.Imprimir();
-
-T.deleteN("adios");
-
-  T.Imprimir();
-
-T.deleteN("enga!");
-
-  T.Imprimir();
-
-  cout << "size arbre: " << T.getSize() << endl;
-
-  return 0;
+            default:
+            break;
+        }
+    }
 }
