@@ -25,7 +25,7 @@ private:
     node* join(node*, int);
     int split(string, node* , int, node**, node**);
     void flip_orientation(int*, struct node *);
-    void pintaInOrdre(node*, bool);
+    void pintaInOrdre(node*, bool&);
     string treeMinNode(node*);
     string treeMaxNode(node*);
 

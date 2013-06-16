@@ -238,17 +238,13 @@ void pinta(node *p) {
 }
 
 
-void RBST::pintaInOrdre(node *p, bool &primer) {
+void RBST::pintaInOrdre(node *p, bool &trobat) {
   if (p != NULL)
   {
-    if (!primer && p->left == NULL) {
-      primer = true;
-      cout << p->key;
-      return;
-    }
-    pintaInOrdre(p->left, primer);
-    cout << "," << p->key;
-    pintaInOrdre(p->right, primer);
+    pintaInOrdre(p->left, trobat);
+    if (!trobat) {cout << p->key; trobat == true;}
+    else cout << "," << p->key;
+    pintaInOrdre(p->right, trobat);
   }
 }
 
@@ -281,10 +277,9 @@ int RBST::gt(string s) {
 
 void RBST::inOrdre() {
     cout << "[";
-    if (this->root != NULL) {}
-      bool primer = (this->root->left == NULL)
-      pintaInOrdre(this->root, primer);
-    }
+    bool trobat = false;
+    if (this->root != NULL)
+       pintaInOrdre(this->root, trobat);
     cout << "]" << endl;
 }
 
