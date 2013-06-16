@@ -232,6 +232,23 @@ int RBST::gtNode(string x, node* T, int sizeT) {
   return sizeT-leqNode(x,T,sizeT);
 }
 
+void RBST::betweenNode(node* p, string min, string max, bool &trobat) {
+  if (p != NULL)
+  {
+    if (p->key >= min && p->key <= max) {
+      betweenNode(p->left, min, max, trobat);
+      if (!trobat) {cout << p->key; trobat = true;}
+      else cout << "," << p->key;
+      betweenNode(p->right, min, max, trobat);
+    }
+    else if (p->key > max) 
+      betweenNode(p->left, min, max, trobat);
+    else 
+      betweenNode(p->right, min, max, trobat);
+  }
+
+}
+
 //Públiques:
 
 
@@ -357,9 +374,19 @@ void RBST::inOrdre() {
     cout << "]" << endl;
 }
 
-void RBST::between(string, string) {
 
-  cout << "[1,2,3] loool te lo has creido!" << endl;
+
+
+void RBST::between(string min, string max) {
+  cout << "[";
+  bool trobat = false;
+  node *p = this->root;
+  if (p != NULL) {
+    while (p != NULL and p->key < min) p = p->right;
+    while (p != NULL and p->key > max) p = p->left; 
+    if (p != NULL) betweenNode(p, min, max, trobat);  
+  }
+  cout << "]" << endl;
 }
 
 string RBST::treeMin() {
