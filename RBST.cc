@@ -181,12 +181,12 @@ void RBST::deleteNode(int x, node* t, int size) {
     parent = t;
     if (x < t->key) {
       if (!t->orientation_right) flip_orientation(&n,t);
-      else n = t->size;
+      else n = n-1-t->size;
       t = t->left;
     }
     else {
       if (t->orientation_right) flip_orientation(&n,t);
-      else n = t->size;
+      else n = n-1-t->size;
       t = t->right;
     }
     //n = n-1-t->size;
