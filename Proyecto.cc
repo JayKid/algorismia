@@ -61,8 +61,8 @@ int main() {
                     {
                         aux.insert(element);
                         arbres[arbre] = aux;
-                        cout << "OK" << endl;
                     }
+                    cout << "OK" << endl;
                 }
             break;
             case DEL:
@@ -74,12 +74,12 @@ int main() {
                 else
                 {
                     aux = arbres[arbre];
-                    if (!aux.contains(element))
+                    if (aux.contains(element))
                     {
                         aux.deleteN(element);
                         arbres[arbre] = aux;
-                        cout << "OK" << endl;
                     }
+                    cout << "OK" << endl;
                 }
             break;
 
@@ -103,7 +103,7 @@ int main() {
             case MERGE:
                 cin >> arbre2;
 
-                cout << "arbre1 es: " << arbre << " arbre2 es: " << arbre2 << endl;
+                // cout << "arbre1 es: " << arbre << " arbre2 es: " << arbre2 << endl;
                 if(arbres.find(arbre) == arbres.end() || arbres.find(arbre2) == arbres.end())
                     cout << "ERROR" << endl;
 
