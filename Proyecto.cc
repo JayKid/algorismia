@@ -129,10 +129,30 @@ int main() {
             break;
 
             case LEQ:
-                
+                cin >> element;
+
+                if(arbres.find(arbre) == arbres.end())
+                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+
+                else 
+                {
+                    aux = arbres[arbre];
+                    cout << aux.leq(element) << endl;
+                }
+
             break;
 
             case GT:
+                cin >> element;
+
+                if(arbres.find(arbre) == arbres.end())
+                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+
+                else 
+                {
+                    aux = arbres[arbre];
+                    cout << aux.gt(element) << endl;
+                }
                 
             break;
 
