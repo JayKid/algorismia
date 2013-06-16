@@ -48,7 +48,11 @@ int main() {
 
             case INS:
                 cin >> element;
-                if(arbres.find(element) != arbres.end())
+
+                if(arbres.find(arbre) == arbres.end())
+                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+
+                else
                 {
                     aux = arbres[arbre];
                     if (!aux.contains(element))
@@ -57,16 +61,22 @@ int main() {
                         arbres[arbre] = aux;
                     }
                 }
-                else
-                {
-                    cout << "El conjunto no ha sido inicializado previamente" << endl;
-                }
             break;
             case DEL:
-                // cin >> element;
-                // aux = arbres[arbre];
-                // aux.deleteN(element);
-                // arbres[arbre] = aux;
+                cin >> element;
+
+                if(arbres.find(arbre) == arbres.end())
+                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+
+                else
+                {
+                    aux = arbres[arbre];
+                    if (!aux.contains(element))
+                    {
+                        aux.deleteN(element);
+                        arbres[arbre] = aux;
+                    }
+                }
             break;
 
             case CONT:
@@ -78,6 +88,12 @@ int main() {
             break;
 
             case CARD:
+
+                if(arbres.find(arbre) == arbres.end())
+                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+
+                else
+                    cout << arbres[arbre].getSize() << endl;
                 
             break;
 
