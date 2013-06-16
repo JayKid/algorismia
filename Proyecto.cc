@@ -37,6 +37,7 @@ int main() {
     while (cin >> command) 
     {
         int command_num = switchmap[command];
+        int number;
         string arbre, element;
         RBST aux,nou;
         cin >> arbre;
@@ -112,18 +113,18 @@ int main() {
 
             case NTH:
 
-                cin >> element;
+                cin >> number;
 
                 if(arbres.find(arbre) == arbres.end())
                     cout << "El conjunto no ha sido inicializado previamente" << endl;
 
-                else if (element < 1 || element > arbres[arbre].getSize())
+                else if (number < 1 || number > arbres[arbre].getSize())
                     cout << "ERROR";
 
                 else
                 {
                     aux = arbres[arbre];
-                    cout << aux.nth(element) << endl;
+                    cout << aux.nth(number) << endl;
                 }
 
             break;
