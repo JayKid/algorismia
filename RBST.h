@@ -6,8 +6,8 @@ using namespace std;
 struct node{
   int size;
   int key;
-  struct node* left;
-  struct node* right;
+  node* left;
+  node* right;
   bool orientation_right;
 };
 
@@ -20,12 +20,9 @@ class RBST {
      
      node* insertAtRoot(int, node *,int);
      node* insertNode(int, node *, int);
-     node* deleteNode(int, node *, int);
-     
-     
-     
-     void split(int, node* , node**, node**);
-     //void Flip_orientatio(int*, struct node *);
+     void deleteNode(int, node *, int);
+     node* join(node*, int);
+     void flip_orientation(int*, struct node *);
      
    public:
      RBST();
@@ -33,9 +30,11 @@ class RBST {
      ~RBST();
      
      int getSize();
-     
+     node* getRoot();
+
+     void split(int, node* , int, node**, node**);//Aquesta va en privates, pero estic fent proves.
      void insert(int);
-     void delete(int);
+     void deleteN(int);
      
      void Imprimir();
 };
