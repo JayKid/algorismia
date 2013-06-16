@@ -38,20 +38,21 @@ int main() {
     {
         int command_num = switchmap[command];
         int number;
-        string arbre, arbre2, element;
+        string arbre, arbre2, element, element2;
         RBST aux,aux2,nou;
         cin >> arbre;
         switch ( command_num ) 
         {
             case INIT:
                 arbres[arbre] = nou;
+                cout << "OK" << endl;
             break;
 
             case INS:
                 cin >> element;
 
                 if(arbres.find(arbre) == arbres.end())
-                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+                    cout << "ERROR" << endl;
 
                 else
                 {
@@ -60,6 +61,7 @@ int main() {
                     {
                         aux.insert(element);
                         arbres[arbre] = aux;
+                        cout << "OK" << endl;
                     }
                 }
             break;
@@ -67,7 +69,7 @@ int main() {
                 cin >> element;
 
                 if(arbres.find(arbre) == arbres.end())
-                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+                    cout << "ERROR" << endl;
 
                 else
                 {
@@ -76,6 +78,7 @@ int main() {
                     {
                         aux.deleteN(element);
                         arbres[arbre] = aux;
+                        cout << "OK" << endl;
                     }
                 }
             break;
@@ -84,7 +87,7 @@ int main() {
                 cin >> element;
 
                 if(arbres.find(arbre) == arbres.end())
-                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+                    cout << "ERROR" << endl;
 
                 else
                 {
@@ -102,17 +105,17 @@ int main() {
 
                 cout << "arbre1 es: " << arbre << " arbre2 es: " << arbre2 << endl;
                 if(arbres.find(arbre) == arbres.end() || arbres.find(arbre2) == arbres.end())
-                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+                    cout << "ERROR" << endl;
 
                 else
                 {
-                    cout << "hey" << endl;
                     aux = arbres[arbre];
                     aux2 = arbres[arbre2];
                     aux.merge(aux2);
                     aux2 = nou;
                     arbres[arbre] = aux;
                     arbres[arbre2] = aux2;
+                    cout << "OK" << endl;
                 }
 
             break;
@@ -120,10 +123,12 @@ int main() {
             case CARD:
 
                 if(arbres.find(arbre) == arbres.end())
-                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+                    cout << "ERROR" << endl;
 
                 else
+                {
                     cout << arbres[arbre].getSize() << endl;
+                }
                 
             break;
 
@@ -132,14 +137,13 @@ int main() {
                 cin >> number;
 
                 if(arbres.find(arbre) == arbres.end())
-                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+                    cout << "ERROR" << endl;
 
                 else if (number < 1 || number > arbres[arbre].getSize())
                     cout << "ERROR";
 
                 else
                 {
-
                     aux = arbres[arbre];
                     aux.Imprimir();
                     cout << aux.nth(number) << endl;
@@ -151,7 +155,7 @@ int main() {
                 cin >> element;
 
                 if(arbres.find(arbre) == arbres.end())
-                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+                    cout << "ERROR" << endl;
 
                 else 
                 {
@@ -165,7 +169,7 @@ int main() {
                 cin >> element;
 
                 if(arbres.find(arbre) == arbres.end())
-                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+                    cout << "ERROR" << endl;
 
                 else 
                 {
@@ -176,12 +180,21 @@ int main() {
             break;
 
             case BETWEEN:
-                
+                cin >> element >> element2;
+
+                if(arbres.find(arbre) == arbres.end())
+                    cout << "ERROR" << endl;
+                else
+                {
+                    aux = arbres[arbre];
+                    aux.between(element,element2);
+                }
+
             break;
 
             case MIN:
                 if(arbres.find(arbre) == arbres.end())
-                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+                    cout << "ERROR" << endl;
 
                 else
                 {
@@ -192,7 +205,7 @@ int main() {
 
             case MAX:
                 if(arbres.find(arbre) == arbres.end())
-                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+                    cout << "ERROR" << endl;
 
                 else
                 {
@@ -203,7 +216,7 @@ int main() {
             break;
 
             case ALL:
-                arbres[arbre].inOrdre();                
+                arbres[arbre].inOrdre();
             break;
         }
     }
