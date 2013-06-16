@@ -49,8 +49,8 @@ public:
     int leq(string);
     int gt(string);
     string nth(int);
+    void merge(RBST);
 
-    RBST merge(RBST);
     void between(string, string);
 
     void Imprimir();

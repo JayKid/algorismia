@@ -7,8 +7,10 @@ ins a e
 ins a f
 ins a g
 all a
-gt a ga
-gt a g
-gt a f
-gt a b
-gt a a
+init b
+ins b aa
+ins b bb
+all b
+merge a b
+all a
+all b

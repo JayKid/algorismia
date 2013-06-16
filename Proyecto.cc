@@ -109,7 +109,7 @@ int main() {
                     cout << "hey" << endl;
                     aux = arbres[arbre];
                     aux2 = arbres[arbre2];
-                    aux = aux.merge(aux2);
+                    aux.merge(aux2);
                     aux2 = nou;
                     arbres[arbre] = aux;
                     arbres[arbre2] = aux2;

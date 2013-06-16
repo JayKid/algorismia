@@ -234,6 +234,14 @@ int RBST::gtNode(string x, node* T, int sizeT) {
 
 //Públiques:
 
+
+void RBST::merge(RBST b) {
+  while (b.size) {
+    insert(b.root->key);
+    b.deleteN(b.root->key);
+  }
+}
+
 int RBST::getSize() {
   return size;
 }
@@ -279,12 +287,6 @@ void RBST::pintaInOrdre(node *p, bool &trobat) {
   }
 }
 
-
-RBST RBST::merge(RBST T) {
-
-  RBST a;
-  return a;
-}
 
 bool RBST::contains(string element) {
   return containsRec(root,element);
