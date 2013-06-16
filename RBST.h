@@ -32,6 +32,7 @@ private:
     int gtNode(string, node*, int);
     bool containsRec(node*, string);
     string nth_rec(int, node*, int);
+    void betweenNode(node*, string, string, bool &); 
 
 public:
     RBST();
@@ -51,7 +52,6 @@ public:
     int gt(string);
     string nth(int);
     void merge(RBST);
-
     void between(string, string);
 
     void Imprimir();
