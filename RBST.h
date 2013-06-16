@@ -43,12 +43,12 @@ public:
     void inOrdre();
     string treeMin();
     string treeMax();
-
-    RBST merge(RBST);
     bool contains(string);
-    string nth(int);
     int leq(string);
     int gt(string);
+
+    RBST merge(RBST);
+    string nth(int);
     void between(string, string);
 
     void Imprimir();

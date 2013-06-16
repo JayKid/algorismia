@@ -201,6 +201,33 @@ string RBST::treeMaxNode(node* p) {
    return (p->right != NULL)?treeMinNode(p->right):p->key;
 }
 
+int RBST::leqNode(string s, node* p, int size) {
+  if (p == NULL) {
+    return 0;
+  }
+  else {
+    int n = p->size;
+    if (p->orientation_right) flip_orientation(&n, p);
+    if (p->key <= s) {
+      return n;
+    }
+    else return leqNode(s, p->left, n);
+  }
+}
+
+int RBST::gtNode(string s, node* p) {
+  if (p == NULL) {
+    return 0;
+  }
+  else {
+    int n = p->size;
+    if (!p->orientation_right) flip_orientation(&n, p);
+    if (p->key >= s) {
+      return n;
+    }
+    else return gtNode(s, p->right, n);
+  }
+}
 
 //Públiques:
 
@@ -211,6 +238,7 @@ int RBST::getSize() {
 node* RBST::getRoot() {
   return root;
 }
+
 
 void RBST::insert(string x) {
   node *p = insertNode(x, this->root, this->size);
@@ -278,13 +306,11 @@ string RBST::nth(int i){
 }
 
 int RBST::leq(string s) {
-
-  return 1231;
+  return leqNode(this->root);
 }
 
 int RBST::gt(string s) {
-
-  return 231;
+  return gtNode(this->root);
 }
 
 void RBST::inOrdre() {
