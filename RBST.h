@@ -31,6 +31,7 @@ private:
     int leqNode(string, node*, int);
     int gtNode(string, node*, int);
     bool containsRec(node*, string);
+    string nth_rec(int, node*, int);
 
 public:
     RBST();

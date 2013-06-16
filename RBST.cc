@@ -306,8 +306,39 @@ bool RBST::containsRec(node *p, string element) {
 }
 
 
+string RBST::nth_rec(int index, node *p, int sizeT)
+{
+  cout << "REC index es: " << index << " size es: " << sizeT << endl;
+  if (p != NULL)
+  {
+    if (p->orientation_right) {
+      p->orientation_right = !p->orientation_right;
+      p->size = sizeT-1-p->size;
+    }
+
+    if (index <= p->size)
+    {
+      cout << "entra per geq" << endl;
+      return nth_rec(index, p->left, p->size);
+    }
+
+    else if (index == p->size+1)
+    {
+      cout << "entra per equals" << endl;
+      return p->key;
+    }
+
+    else 
+    {
+      cout << "entra per lt" << endl;
+      return nth_rec(index-p->size-1,p->right, sizeT-1-p->size);
+    }
+  }
+}
+
 string RBST::nth(int i){
-  return "caca";
+  cout << "NONREC index es: " << i << " size es: " << size << endl;
+  return nth_rec(i, root, size);
 }
 
 int RBST::leq(string s) {

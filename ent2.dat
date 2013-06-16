@@ -1,0 +1,10 @@
+init a
+ins a a
+ins a b
+ins a c
+ins a d
+ins a e
+ins a f
+ins a g
+all a
+nth a 7
