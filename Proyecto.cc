@@ -145,7 +145,6 @@ int main() {
                 else
                 {
                     aux = arbres[arbre];
-                    aux.Imprimir();
                     cout << aux.nth(number) << endl;
                 }
 
