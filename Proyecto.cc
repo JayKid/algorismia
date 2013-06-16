@@ -29,8 +29,6 @@ map<string,int> getSwitchMap()
 }
 
 int main() {
-    RBST T;
-    rand();
 
     map<string,int> switchmap = getSwitchMap();
 
@@ -40,12 +38,12 @@ int main() {
     {
         int command_num = switchmap[command];
         string arbre, element;
-        RBST aux;
+        RBST aux,nou;
         cin >> arbre;
         switch ( command_num ) 
         {
             case INIT:
-                arbres[arbre] = RBST();
+                arbres[arbre] = nou;
             break;
 
             case INS:
@@ -108,7 +106,7 @@ int main() {
             break;
 
             case ALL:
-                
+                arbres[arbre].inOrdre();                
             break;
         }
     }

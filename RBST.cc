@@ -229,6 +229,66 @@ void pinta(node *p) {
   }
 }
 
+
+void RBST::pintaInOrdre(node *p, bool primer) {
+  if (p != NULL)
+  {
+    pintaInOrdre(p->left, false);
+    if (primer) cout << p->key;
+    else cout << "," << p->key;
+    pintaInOrdre(p->right, false);
+  }
+}
+
+
+RBST RBST::merge(RBST T) {
+
+  RBST a;
+  return a;
+}
+
+bool RBST::contains(string s) {
+
+  return true;
+}
+
+
+string RBST::nth(int i){
+  return "caca";
+}
+
+int RBST::leq(string s) {
+
+  return 1231;
+}
+
+int RBST::gt(string s) {
+
+  return 231;
+}
+
+void RBST::inOrdre() {
+    cout << "[";
+    if (this->root != NULL)
+      pintaInOrdre(this->root, true);
+    cout << "]" << endl;
+}
+
+void RBST::between(string, string) {
+
+  cout << "[1,2,3] loool te lo has creido!" << endl;
+}
+
+string RBST::treeMin() {
+
+  return "dale a ALL i mira el primero tonto!";
+}
+
+string RBST::treeMax(){
+
+  return "dale a ALL i mira el ultimo tontaina!";
+}
+
 void RBST::Imprimir() {
     cout << "L'arbre preordre es: " << endl; 
     if (this->root == NULL) {
