@@ -35,20 +35,10 @@ node *RBST::insertAtRoot(int x, node *p, int n) {
   {
     node *S = new node(); //Quiza no hace falta inicializarlos
     node *G = new node();
-    bool dreta = true;
 
-    if (x > p->key)dreta = false;
-
-    split(x,p,n,&S,&G);
-    if (dreta/* && p->orientation_right || !dreta && !p->orientation_right*/) {
-      q->orientation_right = false;
-      q->size = n-1-p->size;
-    }
-    else {
-      q->orientation_right = p->orientation_right;
-      q->size = p->size;
-    }
-
+    q->size = split(x,p,n,&S,&G);
+    cout << "   insertAtRoot q-size = " << q->size << endl;
+    q->orientation_right = false;
     q->key = x; q->left = S; q->right = G;
     cout << "   (insertAtRoot) q: " << (*q).key << " S: " << S << " G: " << G << endl;
   }
@@ -56,31 +46,37 @@ node *RBST::insertAtRoot(int x, node *p, int n) {
   return q;
 }
 
-
-void RBST::split(int x, node *T, int sizeT, node **S, node **G) {
-  cout << "Split (" << x << ", " << T << ")" << endl;
+//retorna el size de S
+int RBST::split(int x, node *T, int sizeT, node **S, node **G) {
+  cout << "Split (" << x << ", " << T << "," << sizeT << ")" << endl;
+  int midaS;
   if (T == NULL) {
     cout << "   es null" << endl;
     *S = *G = NULL;
+    midaS = 0;
   }
   else if (x < T->key) {
     *G = T;
-    if (T->orientation_right) {
-      T->orientation_right = false;
-      T->size = sizeT-1-T->size;
-    }
-    split(x, T->left, T->size, S, &((*G)->left));
-
-  }
-  else {
-    *S = T;
     if (!T->orientation_right) {
       T->orientation_right = true;
       T->size = sizeT-1-T->size;
     }
-    split(x, T->right, T->size, &((*S)->right), G);
+    cout << "cridara amb: " << sizeT-1-T->size << endl;
+    midaS = split(x, T->left, sizeT-1-T->size, S, &((*G)->left));
+  }
+  else {
+    *S = T;
+    if (T->orientation_right) {
+      T->orientation_right = false;
+      T->size = sizeT-1-T->size;
+    }
+    midaS = split(x, T->right, sizeT-1-T->size, &((*S)->right), G);
+    midaS = T->size+midaS+1;
   }
   cout << "Salimos SPLIT con S = " << *S << " i G = " << *G << endl;
+  cout << "---------------S-------------" << endl; pintaNode(*S); cout << endl;
+  cout << "---------------G-------------" << endl; pintaNode(*G); cout << endl;
+  return midaS;
 }
 
 void RBST::flip_orientation(int *n, node *p) {
@@ -246,3 +242,14 @@ void RBST::Imprimir() {
     cout << endl;
 }
 
+  void RBST::pintaNode(node* subarbre) {
+      if (subarbre == NULL) cout << "Abuit" << endl;
+      else {
+        if (subarbre->orientation_right)
+          cout << subarbre->key <<  " te: " << subarbre->size << " fills drets" << endl;
+        else 
+          cout << subarbre->key <<  " te: " << subarbre->size << " fills esquerres" << endl;
+        pintaNode(subarbre->left);
+        pintaNode(subarbre->right);
+    }
+  }

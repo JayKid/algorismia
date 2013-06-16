@@ -1,17 +1,6 @@
 #include "RBST.h"
 
-void pintaNode(node* subarbre) {
-  if (subarbre == NULL) cout << "Abuit" << endl;
-  else {
-    if (subarbre->orientation_right)
-      cout << subarbre->key <<  " te: " << subarbre->size << " fills drets" << endl;
-    else 
-      cout << subarbre->key <<  " te: " << subarbre->size << " fills esquerres" << endl;
-    pintaNode(subarbre->left);
-    pintaNode(subarbre->right);
 
-  }
-}
 
 int main() {
   RBST T;
@@ -28,7 +17,7 @@ int main() {
 cout << "FEM SPLIT" << endl;
 
 node *S, *G;
-T.split(314,T.getRoot(), T.getSize(), &S, &G);
+cout << "returnSplit: " << T.split(314,T.getRoot(), T.getSize(), &S, &G) << endl;
 T.Imprimir();
 
 cout << "FI SPLIT" << endl;
