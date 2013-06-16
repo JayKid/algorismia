@@ -51,7 +51,6 @@ int main() {
 
             case INS:
                 cin >> element;
-                cout << "element es: " << element << endl;
 
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
