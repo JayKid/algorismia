@@ -242,7 +242,7 @@ void RBST::pintaInOrdre(node *p, bool &trobat) {
   if (p != NULL)
   {
     pintaInOrdre(p->left, trobat);
-    if (!trobat) {cout << p->key; trobat == true;}
+    if (!trobat) {cout << p->key; trobat = true;}
     else cout << "," << p->key;
     pintaInOrdre(p->right, trobat);
   }
@@ -255,9 +255,21 @@ RBST RBST::merge(RBST T) {
   return a;
 }
 
-bool RBST::contains(string s) {
+bool RBST::contains(string element) {
+  return containsRec(root,element);
+}
 
-  return true;
+bool RBST::containsRec(node *p, string element) {
+  if (p != NULL)
+  {
+    if (p->key == element)
+      return true;
+    else if (p->key > element)
+      return containsRec(p->left,element);
+    else 
+      return containsRec(p->right,element);
+  }
+  return false;
 }
 
 

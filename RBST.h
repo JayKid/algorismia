@@ -28,6 +28,7 @@ private:
     void pintaInOrdre(node*, bool&);
     string treeMinNode(node*);
     string treeMaxNode(node*);
+    bool containsRec(node*, string);
 
 public:
     RBST();

@@ -80,7 +80,17 @@ int main() {
             break;
 
             case CONT:
-                
+                cin >> element;
+
+                if(arbres.find(arbre) == arbres.end())
+                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+
+                else
+                {
+                    aux = arbres[arbre];
+                    cout << aux.contains(element) << endl;
+                    
+                }
             break;
 
             case MERGE:
