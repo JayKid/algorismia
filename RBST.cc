@@ -198,7 +198,7 @@ string RBST::treeMinNode(node* p) {
 }
 
 string RBST::treeMaxNode(node* p) {
-   return (p->right != NULL)?treeMinNode(p->right):p->key;
+   return (p->right != NULL)?treeMaxNode(p->right):p->key;
 }
 
 int RBST::leqNode(string x, node* T, int sizeT) {
@@ -254,7 +254,9 @@ void RBST::betweenNode(node* p, string min, string max, bool &trobat) {
 
 void RBST::merge(RBST b) {
   while (b.size) {
-    insert(b.root->key);
+    if (!contains(b.root->key)){
+      insert(b.root->key);
+    }
     b.deleteN(b.root->key);
   }
 }

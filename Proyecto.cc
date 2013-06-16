@@ -25,6 +25,7 @@ map<string,int> getSwitchMap()
     m["min"] = MIN;
     m["max"] = MAX;
     m["all"] = ALL;
+    m["impr"] = 100;
     return m;
 }
 
@@ -50,6 +51,7 @@ int main() {
 
             case INS:
                 cin >> element;
+                cout << "element es: " << element << endl;
 
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
@@ -198,7 +200,12 @@ int main() {
                 else
                 {
                     aux = arbres[arbre];
-                    cout << aux.treeMin() << endl;
+                    if (aux.getSize() == 0)
+                        cout << "ERROR" << endl;
+                    else
+                    {
+                        cout << aux.treeMin() << endl;
+                    }
                 }
             break;
 
@@ -209,13 +216,23 @@ int main() {
                 else
                 {
                     aux = arbres[arbre];
-                    cout << aux.treeMax() << endl;
+                    if (aux.getSize() == 0)
+                        cout << "ERROR" << endl;
+                    else
+                    {
+                        cout << aux.treeMax() << endl;
+                    }
                 }
                 
             break;
 
             case ALL:
                 arbres[arbre].inOrdre();
+            break;
+
+            case 100:
+                cout << "entra a imprimir" << endl;
+                arbres[arbre].Imprimir();
             break;
         }
     }
