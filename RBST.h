@@ -28,6 +28,8 @@ private:
     void pintaInOrdre(node*, bool&);
     string treeMinNode(node*);
     string treeMaxNode(node*);
+    int leqNode(string, node*, int);
+    int gtNode(string, node*, int);
     bool containsRec(node*, string);
 
 public:
