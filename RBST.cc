@@ -9,18 +9,13 @@ RBST::RBST(){
   cerr << "Me creo" << endl;
 }
 
-RBST::RBST(int x, node *p){
-  this->size = x;
-  this->root = p;
-  cerr << "Me creo wai" << endl;
-}
 
 RBST::~RBST(){
   cerr << "Me destruyo" << endl;
 }
 
 
-node *RBST::insertAtRoot(int x, node *p, int n) {
+node *RBST::insertAtRoot(string x, node *p, int n) {
   cout << "insertAtRoot (" << x << ", " << p << ", " << n << ")" << endl;
   node *q = new node();
 
@@ -47,7 +42,7 @@ node *RBST::insertAtRoot(int x, node *p, int n) {
 }
 
 //retorna el size de S
-int RBST::split(int x, node *T, int sizeT, node **S, node **G) {
+int RBST::split(string x, node *T, int sizeT, node **S, node **G) {
   cout << "Split (" << x << ", " << T << "," << sizeT << ")" << endl;
   int midaS;
   if (T == NULL) {
@@ -109,18 +104,22 @@ node* RBST::join(node* p, int gs) {
        int cont = 1;
   while (total > 0) {
     cout << "            estem a la iteracio: " << cont << " del bucle, total = " << total << endl;
+    cout << "            LA L: " << l << " i la R: " << r << endl;
     u = 1+rand()%(total);
     if (u <= m) {
       cout << "               entra en el if" << endl;
       *parent = l; parent = &(l->right);
-      cout << "               &m i l: " << &m << " ; " << l << " entra a FLIP_ORIENTATION" << endl;
+      cout << "               m i l: " << m << " ; " << l << " entra a FLIP_ORIENTATION" << endl;
       if (l->orientation_right) flip_orientation(&m,l);
+      else m = m-1-l->size;
       l = l->right;
     }
     else {
       cout << "               entra en el else" << endl;
       *parent = r; parent = &(r->left);
-      if (!l->orientation_right) flip_orientation(&n,r);
+      cout << "               n i r: " << n << " ; " << r << " entra a FLIP_ORIENTATION" << endl;
+      if (!r->orientation_right) flip_orientation(&n,r);
+      else n = n-1-r->size;
       r = r->left;
     }
     total = m+n;
@@ -133,7 +132,7 @@ node* RBST::join(node* p, int gs) {
 
 
 
-node *RBST::insertNode(int x, node *p, int n) {
+node *RBST::insertNode(string x, node *p, int n) {
   cout << "insertNode" << endl;
   int r = rand()%(n+1);
   cout << "    rand: " << r << " n: " << n << endl;
@@ -159,7 +158,7 @@ node *RBST::insertNode(int x, node *p, int n) {
   return p;
 }
 
-void RBST::deleteNode(int x, node* t, int size) {
+void RBST::deleteNode(string x, node* t, int size) {
   cout << "   Entrem a deleteNode (" << x << ", " << t << ", " << size << ")" << endl;
   node *parent, *aux;
   parent = NULL;
@@ -205,13 +204,13 @@ node* RBST::getRoot() {
   return root;
 }
 
-void RBST::insert(int x) {
+void RBST::insert(string x) {
   node *p = insertNode(x, this->root, this->size);
   this->root = p;
   this->size += 1;
 }
 
-void RBST::deleteN(int x) {
+void RBST::deleteN(string x) {
   cout << "Entrem a deleteN (" << x << ")" << endl;
   deleteNode(x, this->root, this->size);
   this->size -= 1;

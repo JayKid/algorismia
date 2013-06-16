@@ -1,11 +1,12 @@
 #include <string>
 #include <iostream>
+#include <string>
 #include <stdlib.h>  //srand, rand
 using namespace std;
 
 struct node{
   int size;
-  int key;
+  string key;
   node* left;
   node* right;
   bool orientation_right;
@@ -18,24 +19,25 @@ private:
     int size;
     node* root;
 
-    node* insertAtRoot(int, node *,int);
-    node* insertNode(int, node *, int);
-    void deleteNode(int, node *, int);
+    node* insertAtRoot(string, node *,int);
+    node* insertNode(string, node *, int);
+    void deleteNode(string, node *, int);
     node* join(node*, int);
+    int split(string, node* , int, node**, node**);
     void flip_orientation(int*, struct node *);
 
 public:
     RBST();
-    RBST(int, node*);
     ~RBST();
 
     int getSize();
     node* getRoot();
 
-    void pintaNode(node*); 
-    int split(int, node* , int, node**, node**);//Aquesta va en privates, pero estic fent proves.
-    void insert(int);
-    void deleteN(int);
+    void pintaNode(node*); //aquesta va fora
+    void insert(string);
+    void deleteN(string);
+    RBST unionN(RBST);
+    bool contains(string);
 
     void Imprimir();
  };

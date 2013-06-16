@@ -33,27 +33,28 @@ int main() {
 
 
 
-for (int i = 10; i>=1 ; i--) {
-  cout << "VAMOS A INSERTAR " << i << endl;
-  T.insert(i);
-  cout << "HEMOS INSERTADO " << i << endl;
+T.insert("hola");
 
-}
+T.insert("adios");
+
+T.insert("enga!");
 
   T.Imprimir();
   cout << "size arbre: " << T.getSize() << endl;
 
-for (int i = 10; i >=1; i--) {
-  T.deleteN(i);
+T.deleteN("hola");
+
   T.Imprimir();
-}
+
+T.deleteN("adios");
+
+  T.Imprimir();
+
+T.deleteN("enga!");
+
+  T.Imprimir();
 
   cout << "size arbre: " << T.getSize() << endl;
-
-  int j;
-  cin >> j;
-
-  T.Imprimir();
 
   return 0;
 }
