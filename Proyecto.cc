@@ -1,5 +1,5 @@
 #include "RBST.h"
-#include <map>;
+#include <map>
 
 const int INIT = 1;const int INS = 2;
 const int DEL = 3;const int CONT = 4;
@@ -39,7 +39,8 @@ int main() {
     while (cin >> command) 
     {
         int command_num = switchmap[command];
-        string arbre;
+        string arbre, element;
+        RBST aux;
         cin >> arbre;
         switch ( command_num ) 
         {
@@ -48,9 +49,26 @@ int main() {
             break;
 
             case INS:
+                cin >> element;
+                if(arbres.find(element) != arbres.end())
+                {
+                    aux = arbres[arbre];
+                    if (!aux.contains(element))
+                    {
+                        aux.insert(element);
+                        arbres[arbre] = aux;
+                    }
+                }
+                else
+                {
+                    cout << "El conjunto no ha sido inicializado previamente" << endl;
+                }
             break;
-
             case DEL:
+                // cin >> element;
+                // aux = arbres[arbre];
+                // aux.deleteN(element);
+                // arbres[arbre] = aux;
             break;
 
             case CONT:
@@ -91,9 +109,6 @@ int main() {
 
             case ALL:
                 
-            break;
-
-            default:
             break;
         }
     }
