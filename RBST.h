@@ -36,8 +36,15 @@ public:
     void pintaNode(node*); //aquesta va fora
     void insert(string);
     void deleteN(string);
-    RBST unionN(RBST);
+    RBST merge(RBST);
     bool contains(string);
+    string nth(int);
+    int leq(string);
+    int gt(string);
+    void inOrdre();
+    void between(string, string);
+    string treeMin();
+    string treeMax();
 
     void Imprimir();
  };
