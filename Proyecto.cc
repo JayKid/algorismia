@@ -42,15 +42,19 @@ int main() {
         string arbre, arbre2, element, element2;
         RBST aux,aux2,nou;
         cin >> arbre;
+        cout << "> " << command << " " << arbre;
+
         switch ( command_num ) 
         {
             case INIT:
+                cout << endl;
                 arbres[arbre] = nou;
                 cout << "OK" << endl;
             break;
 
             case INS:
                 cin >> element;
+                cout << " " << element << endl;
 
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
@@ -68,6 +72,7 @@ int main() {
             break;
             case DEL:
                 cin >> element;
+                cout << " " << element << endl;
 
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
@@ -86,6 +91,7 @@ int main() {
 
             case CONT:
                 cin >> element;
+                cout << " " << element << endl;
 
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
@@ -103,6 +109,7 @@ int main() {
 
             case MERGE:
                 cin >> arbre2;
+                cout << " " << arbre2 << endl;
 
                 // cout << "arbre1 es: " << arbre << " arbre2 es: " << arbre2 << endl;
                 if(arbres.find(arbre) == arbres.end() || arbres.find(arbre2) == arbres.end())
@@ -123,6 +130,7 @@ int main() {
 
             case CARD:
 
+                cout << endl;
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
 
@@ -136,6 +144,7 @@ int main() {
             case NTH:
 
                 cin >> number;
+                cout << " " << number << endl;
 
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
@@ -153,6 +162,7 @@ int main() {
 
             case LEQ:
                 cin >> element;
+                cout << " " << element << endl;
 
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
@@ -167,6 +177,7 @@ int main() {
 
             case GT:
                 cin >> element;
+                cout << " " << element << endl;
 
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
@@ -181,6 +192,8 @@ int main() {
 
             case BETWEEN:
                 cin >> element >> element2;
+                cout << " " << element << " " << element2 << endl;
+
 
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
@@ -193,6 +206,7 @@ int main() {
             break;
 
             case MIN:
+                cout << endl;
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
 
@@ -209,6 +223,7 @@ int main() {
             break;
 
             case MAX:
+                cout << endl;
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
 
@@ -226,12 +241,8 @@ int main() {
             break;
 
             case ALL:
+                cout << endl;
                 arbres[arbre].inOrdre();
-            break;
-
-            case 100:
-                cout << "entra a imprimir" << endl;
-                arbres[arbre].Imprimir();
             break;
         }
     }
