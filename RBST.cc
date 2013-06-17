@@ -1,27 +1,22 @@
 #include "RBST.h"
 
-
-//Privades:
-
 RBST::RBST(){
   this->size = 0;
   this->root = NULL;
-  //cerr << "Me creo" << endl;
 }
 
 
 RBST::~RBST(){
-  //cerr << "Me destruyo" << endl;
 }
 
+/* Funcion que dados un elemento, un puntero a nodo y el size del arbol
+ inserta el nodo en la raiz del arbol */
 
 node *RBST::insertAtRoot(string x, node *p, int n) {
-  //cout << "insertAtRoot (" << x << ", " << p << ", " << n << ")" << endl;
   node *q = new node();
 
   if (p == NULL)
   {
-    //cout << "   (insertAtRoot) NULL" << endl;
     q->key = x;
     q->orientation_right = true;
     q->size = 0;
@@ -32,21 +27,21 @@ node *RBST::insertAtRoot(string x, node *p, int n) {
     node *G = new node();
 
     q->size = split(x,p,n,&S,&G);
-    //cout << "   insertAtRoot q-size = " << q->size << endl;
     q->orientation_right = false;
     q->key = x; q->left = S; q->right = G;
-    //cout << "   (insertAtRoot) q: " << (*q).key << " S: " << S << " G: " << G << endl;
   }
   
   return q;
 }
 
-//retorna el size de S
+/* 
+
+???
+
+*/
 int RBST::split(string x, node *T, int sizeT, node **S, node **G) {
-  //cout << "Split (" << x << ", " << T << "," << sizeT << ")" << endl;
   int midaS;
   if (T == NULL) {
-    //cout << "   es null" << endl;
     *S = *G = NULL;
     midaS = 0;
   }
@@ -56,7 +51,6 @@ int RBST::split(string x, node *T, int sizeT, node **S, node **G) {
       T->orientation_right = true;
       T->size = sizeT-1-T->size;
     }
-    //cout << "cridara amb: " << sizeT-1-T->size << endl;
     midaS = split(x, T->left, sizeT-1-T->size, S, &((*G)->left));
   }
   else {
@@ -68,32 +62,31 @@ int RBST::split(string x, node *T, int sizeT, node **S, node **G) {
     midaS = split(x, T->right, sizeT-1-T->size, &((*S)->right), G);
     midaS = T->size+midaS+1;
   }
-  //cout << "Salimos SPLIT con S = " << *S << " i G = " << *G << endl;
-  //cout << "---------------S-------------" << endl; pintaNode(*S); cout << endl;
-  //cout << "---------------G-------------" << endl; pintaNode(*G); cout << endl;
   return midaS;
 }
 
+/* Funcion que dado un puntero a numero y otro a nodo 
+cambia la orientacion del nodo y nos deja en n el size del hijo 
+al que apuntaba */
+
 void RBST::flip_orientation(int *n, node *p) {
-  //cout << "FLIP_ORIENTATION (" << *n << ")" << endl;
-  //if (p == NULL) cout << "es null la liarem!!!!!!" << endl; 
   int aux = *n-1-p->size;
   *n = p->size;
   p->size = aux;
   p->orientation_right = !p->orientation_right;
 };
 
+/* Función que dado un puntero a nodo y un entero 
+retorna un puntero apuntando al nuevo nodo que es la union 
+de los dos subarboles del nodo inicial sin el nodo root inicial */
 
 node* RBST::join(node* p, int gs) {
-  //cout << "            Entra al Join con un size: "<< gs << endl;
   node *l, *r, *result;
   node **parent;
   int m, n, u, total;
 
   if (p->orientation_right) {n = p->size; m = gs-1-n;}
   else {m = p->size; n = gs-1-m;}
-
-  //cout << "            hijos derechos: " << n << ", hijos izquierdos: " << m << endl;
 
   total = m+n;
 
@@ -103,21 +96,15 @@ node* RBST::join(node* p, int gs) {
   l = p->left; r = p->right;
        int cont = 1;
   while (total > 0) {
-    //cout << "            estem a la iteracio: " << cont << " del bucle, total = " << total << endl;
-    //cout << "            LA L: " << l << " i la R: " << r << endl;
     u = 1+rand()%(total);
     if (u <= m) {
-      //cout << "               entra en el if" << endl;
       *parent = l; parent = &(l->right);
-      //cout << "               m i l: " << m << " ; " << l << " entra a FLIP_ORIENTATION" << endl;
       if (l->orientation_right) flip_orientation(&m,l);
       else m = m-1-l->size;
       l = l->right;
     }
     else {
-      //cout << "               entra en el else" << endl;
       *parent = r; parent = &(r->left);
-      //cout << "               n i r: " << n << " ; " << r << " entra a FLIP_ORIENTATION" << endl;
       if (!r->orientation_right) flip_orientation(&n,r);
       else n = n-1-r->size;
       r = r->left;
@@ -125,21 +112,17 @@ node* RBST::join(node* p, int gs) {
     total = m+n;
     cont++;
   }
-  //free(p); //NO SE SI FA EL QUE HAURIA.
   return result;
-
 }
 
 
+/* Funcion que dado un elemento, un puntero a nodo y el tamaño
+inserta el elemento en el árbol que tiene como nodo raiz p */
 
 node *RBST::insertNode(string x, node *p, int n) {
-  //cout << "insertNode" << endl;
   int r = rand()%(n+1);
-  //cout << "    rand: " << r << " n: " << n << endl;
   if (r == n) {
-    //cout << "    insertRoot" << endl;
     p = insertAtRoot(x,p,n);
-    //cout << "    p->key: " << p->key << endl;
   }
   else if (x < p->key) {
     if (!p->orientation_right) {
@@ -158,17 +141,16 @@ node *RBST::insertNode(string x, node *p, int n) {
   return p;
 }
 
+/* Funcion que dado un elemento, un puntero a nodo y el tamaño
+borra el elemento en el árbol que tiene como nodo raiz p */
+
 void RBST::deleteNode(string x, node* t, int size) {
-  //cout << "   Entrem a deleteNode (" << x << ", " << t << ", " << size << ")" << endl;
   node *parent, *aux;
   parent = NULL;
   int n = size;
       int cont = 1;
   while(t != NULL) {
-    //cout << "      estem a la iteracio: " << cont << " del bucle, el size es: " << n << " i t es: " << t << endl;
-    //cout << "      x <> t->key : " << x << " <> " << t->key << endl;
     if (x == t->key) {
-      //cout << "         El troba!!! cridem a JOIN" << endl;
       aux = join(t,n);
       if (parent == NULL) this->root = aux;
       else {
@@ -188,18 +170,26 @@ void RBST::deleteNode(string x, node* t, int size) {
       else n = n-1-t->size;
       t = t->right;
     }
-    //n = n-1-t->size;
     cont++;
   }
 }
+
+/* Funcion que dado un puntero a nodo, retorna el elemento
+de orden lexicografico menor */
 
 string RBST::treeMinNode(node* p) {
    return (p->left != NULL)?treeMinNode(p->left):p->key;
 }
 
+/* Funcion que dado un puntero a nodo, retorna el elemento
+de orden lexicografico mayor */
+
 string RBST::treeMaxNode(node* p) {
    return (p->right != NULL)?treeMaxNode(p->right):p->key;
 }
+
+/* Funcion que dado un elemento, un puntero a nodo y el tamaño,
+retorna todos los elementos menores o iguales */
 
 int RBST::leqNode(string x, node* T, int sizeT) {
 
@@ -228,9 +218,15 @@ int RBST::leqNode(string x, node* T, int sizeT) {
   return midaS;
 }
 
+/* Funcion que dado un elemento, un puntero a nodo y el tamaño,
+retorna todos los elementos mayores */
+
 int RBST::gtNode(string x, node* T, int sizeT) {
   return sizeT-leqNode(x,T,sizeT);
 }
+
+/* Funcion que retorna todos los elementos que son >= que min
+y <= que max */
 
 void RBST::betweenNode(node* p, string min, string max, bool &trobat) {
   if (p != NULL)
@@ -249,8 +245,7 @@ void RBST::betweenNode(node* p, string min, string max, bool &trobat) {
 
 }
 
-//Públiques:
-
+/* Funcion que une dos arboles en el objeto desde el que se llama */
 
 void RBST::merge(RBST b) {
   while (b.size) {
@@ -261,14 +256,19 @@ void RBST::merge(RBST b) {
   }
 }
 
+/* Funcion que retorna el tamaño del árbol */
+
 int RBST::getSize() {
   return size;
 }
+
+/* Funcion que retorna la raiz del árbol */
 
 node* RBST::getRoot() {
   return root;
 }
 
+/* Funcion que inserta el elemento x en el árbol */
 
 void RBST::insert(string x) {
   node *p = insertNode(x, this->root, this->size);
@@ -276,12 +276,14 @@ void RBST::insert(string x) {
   this->size += 1;
 }
 
+/* Funcion que elimina el elemento x del árbol */
+
 void RBST::deleteN(string x) {
-  //cout << "Entrem a deleteN (" << x << ")" << endl;
   deleteNode(x, this->root, this->size);
   this->size -= 1;
-  //cout << "Sortim de deleteN" << endl;
 }
+
+/* Funcion que imprime el árbol */
 
 void pinta(node *p) {
   if (p == NULL) cout << "Abuit" << endl;
@@ -295,6 +297,7 @@ void pinta(node *p) {
   }
 }
 
+/* Funcion que imprime el árbol en inorden */
 
 void RBST::pintaInOrdre(node *p, bool &trobat) {
   if (p != NULL)
@@ -307,9 +310,15 @@ void RBST::pintaInOrdre(node *p, bool &trobat) {
 }
 
 
+/* Funcion que retorna cierto si existe el elemento
+en el árbol */
+
 bool RBST::contains(string element) {
   return containsRec(root,element);
 }
+
+/* Funcion que retorna cierto si existe el elemento
+en el árbol apuntado por p */
 
 bool RBST::containsRec(node *p, string element) {
   if (p != NULL)
@@ -324,10 +333,11 @@ bool RBST::containsRec(node *p, string element) {
   return false;
 }
 
+/* Funcion que retorna el enésimo elemento del arbol
+en orden lexicografico */
 
 string RBST::nth_rec(int index, node *p, int sizeT)
 {
-  //cout << "REC index es: " << index << " size es: " << sizeT << endl;
   if (p != NULL)
   {
     if (p->orientation_right) {
@@ -337,36 +347,43 @@ string RBST::nth_rec(int index, node *p, int sizeT)
 
     if (index <= p->size)
     {
-      //cout << "entra per geq" << endl;
       return nth_rec(index, p->left, p->size);
     }
 
     else if (index == p->size+1)
     {
-      //cout << "entra per equals" << endl;
       return p->key;
     }
 
     else 
     {
-      //cout << "entra per lt" << endl;
       return nth_rec(index-p->size-1,p->right, sizeT-1-p->size);
     }
   }
 }
 
+/* Funcion que retorna el enésimo elemento del arbol
+en orden lexicografico */
+
 string RBST::nth(int i){
-  //cout << "NONREC index es: " << i << " size es: " << size << endl;
   return nth_rec(i, root, size);
 }
+
+/* Funcion que dado un elemento retorna todos los
+ elementos menores o iguales */
 
 int RBST::leq(string s) {
   return leqNode(s,this->root,this->size);
 }
 
+/* Funcion que dado un elemento retorna todos los
+ elementos mayores */
+
 int RBST::gt(string s) {
   return gtNode(s,this->root, this->size);
 }
+
+/* Funcion que imprime el árbol en inorden */
 
 void RBST::inOrdre() {
     cout << "[";
@@ -377,7 +394,8 @@ void RBST::inOrdre() {
 }
 
 
-
+/* Funcion que retorna todos los elementos que son >= que min
+y <= que max */
 
 void RBST::between(string min, string max) {
   cout << "[";
@@ -391,13 +409,21 @@ void RBST::between(string min, string max) {
   cout << "]" << endl;
 }
 
+/* Funcion que retorna el elemento
+de orden lexicografico menor */
+
 string RBST::treeMin() {
   return treeMinNode(this->root);
 }
 
+/* Funcion que retorna el elemento
+de orden lexicografico menor */
+
 string RBST::treeMax(){
   return treeMaxNode(this->root);
 }
+
+/* Funcion que imprime el árbol en preorden */
 
 void RBST::Imprimir() {
     cout << "L'arbre preordre es: " << endl; 

@@ -9,6 +9,11 @@ const int GT = 9;const int BETWEEN = 10;
 const int MIN = 11;const int MAX = 12;
 const int ALL = 13;
 
+
+/* Funcion auxiliar que se usa para que el switch 
+siga trabajando con enteros mientras lee strings 
+como comando por la entrada */
+
 map<string,int> getSwitchMap() 
 {
     map<string,int> m;
@@ -111,7 +116,6 @@ int main() {
                 cin >> arbre2;
                 cout << " " << arbre2 << endl;
 
-                // cout << "arbre1 es: " << arbre << " arbre2 es: " << arbre2 << endl;
                 if(arbres.find(arbre) == arbres.end() || arbres.find(arbre2) == arbres.end())
                     cout << "ERROR" << endl;
 
