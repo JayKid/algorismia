@@ -1,3 +1,12 @@
+/*
+
+Autores: Josep Lopez y Roger De Moreta
+
+Ultima practica de Algorismia, implementada con RBST's
+
+*/
+
+
 #include "RBST.h"
 #include <map>
 
@@ -30,7 +39,8 @@ map<string,int> getSwitchMap()
     m["min"] = MIN;
     m["max"] = MAX;
     m["all"] = ALL;
-    m["impr"] = 100;
+    m["impr"] = 14;  //Este lo usamos para hacer pruebas.
+    m["alt"] = 15;   //Este tambien.
     return m;
 }
 
@@ -38,14 +48,15 @@ int main() {
 
     map<string,int> switchmap = getSwitchMap();
 
+    srand (time(NULL));
+    
+    string arbre, arbre2, element2, element;
+    int command_num;
     string command;
     map<string,RBST> arbres;
     while (cin >> command) 
     {
-        int command_num = switchmap[command];
-        int number;
-        string arbre, arbre2, element, element2;
-        RBST aux,aux2,nou;
+        command_num = switchmap[command];
         cin >> arbre;
         cout << "> " << command << " " << arbre;
 
@@ -53,7 +64,7 @@ int main() {
         {
             case INIT:
                 cout << endl;
-                arbres[arbre] = nou;
+                arbres[arbre] = RBST();
                 cout << "OK" << endl;
             break;
 
@@ -66,11 +77,9 @@ int main() {
 
                 else
                 {
-                    aux = arbres[arbre];
-                    if (!aux.contains(element))
+                    if (!arbres[arbre].contains(element))
                     {
-                        aux.insert(element);
-                        arbres[arbre] = aux;
+                        arbres[arbre].insert(element);
                     }
                     cout << "OK" << endl;
                 }
@@ -84,11 +93,9 @@ int main() {
 
                 else
                 {
-                    aux = arbres[arbre];
-                    if (aux.contains(element))
+                    if (arbres[arbre].contains(element))
                     {
-                        aux.deleteN(element);
-                        arbres[arbre] = aux;
+                        arbres[arbre].deleteN(element);
                     }
                     cout << "OK" << endl;
                 }
@@ -103,8 +110,7 @@ int main() {
 
                 else
                 {
-                    aux = arbres[arbre];
-                    if (aux.contains(element))
+                    if (arbres[arbre].contains(element))
                         cout << "true";
                     else cout << "false";
                     cout << endl;
@@ -121,19 +127,13 @@ int main() {
 
                 else
                 {
-                    aux = arbres[arbre];
-                    aux2 = arbres[arbre2];
-                    aux.merge(aux2);
-                    aux2 = nou;
-                    arbres[arbre] = aux;
-                    arbres[arbre2] = aux2;
+                    arbres[arbre].merge(arbres[arbre2]);
                     cout << "OK" << endl;
                 }
 
             break;
 
             case CARD:
-
                 cout << endl;
                 if(arbres.find(arbre) == arbres.end())
                     cout << "ERROR" << endl;
@@ -146,7 +146,7 @@ int main() {
             break;
 
             case NTH:
-
+                int number;
                 cin >> number;
                 cout << " " << number << endl;
 
@@ -158,8 +158,7 @@ int main() {
 
                 else
                 {
-                    aux = arbres[arbre];
-                    cout << aux.nth(number) << endl;
+                    cout << arbres[arbre].nth(number) << endl;
                 }
 
             break;
@@ -173,8 +172,7 @@ int main() {
 
                 else 
                 {
-                    aux = arbres[arbre];
-                    cout << aux.leq(element) << endl;
+                    cout << arbres[arbre].leq(element) << endl;
                 }
 
             break;
@@ -188,8 +186,7 @@ int main() {
 
                 else 
                 {
-                    aux = arbres[arbre];
-                    cout << aux.gt(element) << endl;
+                    cout << arbres[arbre].gt(element) << endl;
                 }
                 
             break;
@@ -203,8 +200,7 @@ int main() {
                     cout << "ERROR" << endl;
                 else
                 {
-                    aux = arbres[arbre];
-                    aux.between(element,element2);
+                    arbres[arbre].between(element,element2);
                 }
 
             break;
@@ -216,12 +212,11 @@ int main() {
 
                 else
                 {
-                    aux = arbres[arbre];
-                    if (aux.getSize() == 0)
+                    if (arbres[arbre].getSize() == 0)
                         cout << "ERROR" << endl;
                     else
                     {
-                        cout << aux.treeMin() << endl;
+                        cout << arbres[arbre].treeMin() << endl;
                     }
                 }
             break;
@@ -233,12 +228,11 @@ int main() {
 
                 else
                 {
-                    aux = arbres[arbre];
-                    if (aux.getSize() == 0)
+                    if (arbres[arbre].getSize() == 0)
                         cout << "ERROR" << endl;
                     else
                     {
-                        cout << aux.treeMax() << endl;
+                        cout << arbres[arbre].treeMax() << endl;
                     }
                 }
                 
@@ -247,6 +241,16 @@ int main() {
             case ALL:
                 cout << endl;
                 arbres[arbre].inOrdre();
+            break;
+
+            case 14: //impr
+                cout << " IMPR" << endl;
+                arbres[arbre].imprimir();
+            break;
+
+            case 15: //alturas
+                cout << " ALT" << endl;
+                arbres[arbre].altura();
             break;
         }
     }

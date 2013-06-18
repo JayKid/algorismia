@@ -1,6 +1,15 @@
+/*
+
+Autores: Josep Lopez y Roger De Moreta
+
+Ultima practica de Algorismia, implementada con RBST's
+
+*/
+
 #include <string>
 #include <iostream>
-#include <string>
+#include <cmath>
+#include <time.h>
 #include <stdlib.h>  //srand, rand
 using namespace std;
 
@@ -41,7 +50,6 @@ public:
     int getSize();
     node* getRoot();
 
-    void pintaNode(node*); //aquesta va fora
     void insert(string);
     void deleteN(string);
     void inOrdre();
@@ -51,8 +59,9 @@ public:
     int leq(string);
     int gt(string);
     string nth(int);
-    void merge(RBST);
+    void merge(RBST&);
     void between(string, string);
 
-    void Imprimir();
+    void imprimir();
+    void altura();
  };
